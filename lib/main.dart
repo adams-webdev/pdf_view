@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter PDF View',
+      title: 'IASLC Staging Cards',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.blue[900],
@@ -203,6 +203,8 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
               title: Text("Nodal Chart"),
               onTap: () {
                 // TODO: Go to page 3 (index 2)
+
+
 
                 Navigator.pop(context); // Close drawer
               },
