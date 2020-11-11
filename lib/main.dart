@@ -100,9 +100,9 @@ class _MyAppState extends State<MyApp> {
           builder: (BuildContext context) {
             return ListView(
               children: <Widget>[
-                ListTile(
-                  title: Text("Open Staging Cards"),
-                  onTap: () {
+                RaisedButton(
+                  child: Text("Open Staging Cards"),
+                  onPressed: () {
                     if (pathPDF != null || pathPDF.isNotEmpty) {
                       Navigator.push(
                         context,
@@ -126,19 +126,19 @@ class _MyAppState extends State<MyApp> {
                 //     }
                 //   },
                 // ),
-                ListTile(
-                  title: Text("Download PDF"),
-                  onTap: () {
-                    if (remotePDFpath != null || remotePDFpath.isNotEmpty) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PDFScreen(path: remotePDFpath),
-                        ),
-                      );
-                    }
-                  },
-                ),
+                // ListTile(
+                //   title: Text("Download PDF"),
+                //   onTap: () {
+                //     if (remotePDFpath != null || remotePDFpath.isNotEmpty) {
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //           builder: (context) => PDFScreen(path: remotePDFpath),
+                //         ),
+                //       );
+                //     }
+                //   },
+                // ),
                 // RaisedButton(
                 //   child: Text("Open Corrupted PDF"),
                 //   onPressed: () {
@@ -153,23 +153,6 @@ class _MyAppState extends State<MyApp> {
                 //     }
                 //   },
                 // )
-                  ListTile(
-                    title: Text("CT Atlas"),
-                    onTap: () {
-                      setState(() {
-
-                      });
-                      if (pathPDF != null || pathPDF.isNotEmpty) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PDFScreen(path: pathPDF),
-
-                          ),
-                        );
-                      }
-                    },
-                  ),
               ],
             );
           },
@@ -202,14 +185,30 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         title: Text("Staging Cards"),
         backgroundColor: Colors.blue[900],
         actions: <Widget>[
-          // Alternate location for Contents
-          IconButton(
-            icon: Icon(Icons.view_list),
-            onPressed: () {
-
-            },
-          ),
         ],
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          // TODO: Create ListTiles with loop from contents.json
+          children: [
+            ListTile(
+              title: Text("CT Atlas"),
+              onTap: () {
+                // TODO: Go to page 1 (index 0)
+
+                Navigator.pop(context); // Close drawer
+              },
+            ),
+            ListTile(
+              title: Text("Nodal Chart"),
+              onTap: () {
+                // TODO: Go to page 3 (index 2)
+
+                Navigator.pop(context); // Close drawer
+              },
+            ),
+          ],
+        ),
       ),
       body: Stack(
         children: <Widget>[
@@ -272,9 +271,9 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
           if (snapshot.hasData) {
             return FloatingActionButton.extended(
-              label: Text("Go to ${pages ~/ 2}"),
+              label: Text("Go to p. 3"),
               onPressed: () async {
-                await snapshot.data.setPage(pages ~/ 2);
+                await snapshot.data.setPage(2);
               },
             );
           }
