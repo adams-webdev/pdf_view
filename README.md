@@ -1,6 +1,6 @@
 # pdf_view
 
-A new Flutter application.
+This application is for viewing a 32-page PDF with navigation and the ability to zoom cards with gestures as well as scroll through them.
 
 ## Getting Started
 
