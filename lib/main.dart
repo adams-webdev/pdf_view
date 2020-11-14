@@ -187,30 +187,40 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
         actions: <Widget>[
         ],
       ),
-      endDrawer: Drawer(
-        child: ListView(
-          // TODO: Create ListTiles with loop from contents.json
-          children: [
-            ListTile(
-              title: Text("CT Atlas"),
-              onTap: () {
-                // TODO: Go to page 1 (index 0)
+      endDrawer: FutureBuilder<PDFViewController>(
+        future: _controller.future,
+        builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
+          if (snapshot.hasData) {
+            return Drawer(
+              child: ListView(
+                // TODO: Create ListTiles with loop from contents.json
+                children: [
+                  ListTile(
+                    title: Text("CT Atlas"),
+                    onTap: () async {
+                      // TODO: Go to page 1 (index 0)
+                      await snapshot.data.setPage(1);
 
-                Navigator.pop(context); // Close drawer
-              },
-            ),
-            ListTile(
-              title: Text("Nodal Chart"),
-              onTap: () {
-                // TODO: Go to page 3 (index 2)
+                      Navigator.pop(context); // Close drawer
+                    },
+                  ),
+                  ListTile(
+                    title: Text("Nodal Chart"),
+                    onTap: () async {
+                      // TODO: Go to page 3 (index 2)
 
+                      await snapshot.data.setPage(3);
 
+                      Navigator.pop(context); // Close drawer
+                    },
+                  ),
+                ],
+              ),
+            );
+          }
 
-                Navigator.pop(context); // Close drawer
-              },
-            ),
-          ],
-        ),
+          return Container();
+        },
       ),
       body: Stack(
         children: <Widget>[
